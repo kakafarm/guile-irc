@@ -13,3 +13,6 @@ config.log
 doc/api.info
 env
 irc/config.scm
+test/*.log
+test/*.trs
+test-suite.log
