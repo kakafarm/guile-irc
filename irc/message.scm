@@ -157,14 +157,13 @@
   (catch #t
     (lambda ()
       (let-values ([(m1 m2) (run-parser-regex msg)])
-	(_make-message
-         (parse-prefix (match:substring m1 2))              ;; prefix
-	 (symbolize (match:substring m1 3))                 ;; command 
-	 (flatten (string-tokenize (match:substring m2 1))) ;; middle
-	 (match:substring m2 2)                             ;; trailing 
-	 (current-time)                                     ;; time 
-	 msg                                                ;; raw
-         ))) 
+	    (_make-message
+         (parse-prefix (match:substring m1 2))              ;prefix
+	     (symbolize (match:substring m1 3))                 ;command
+	     (flatten (string-tokenize (match:substring m2 1))) ;middle
+	     (match:substring m2 2)                             ;trailing
+	     (current-time)                                     ;time
+	     msg)))                                             ;raw
     (lambda (key . args)
       (error-parsing "parsing failed; UNHANDLED: ~a" args))))
 
