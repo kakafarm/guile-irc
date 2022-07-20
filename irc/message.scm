@@ -180,11 +180,12 @@ trailing: string."
 	  (symbol? cmd)) cmd)
      (else 
       (error-type "Expected command to be of type symbol or string or number."))))
-  (define (check-middle middle)
+  (define (middle-valid? middle)
     (cond
      ((not middle) #f)
-     ((and (list? middle) (every string? middle))
-      (error-type "Expected middle to be of type string or '(string)."))
+     ((list? middle)
+      (or (every string? middle)
+          (error-type "Expected middle to be of type string or '(string).")))
      ((string? middle) middle)
      (else 
       (error-type "Expected middle to be of type string or '(string)."))))
@@ -193,8 +194,8 @@ trailing: string."
         (error-type "Expected trailing to be of string.")
 	trail))
   (let ([cmd (check-command command)]
-	[middle (check-middle middle)]
-	[trailing (check-trailing trailing)])
+	    [middle (and (middle-valid? middle) middle)]
+	    [trailing (check-trailing trailing)])
     (_make-message
      #f       ;; prefix
      command  ;; command
