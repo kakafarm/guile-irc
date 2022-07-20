@@ -335,8 +335,8 @@ returns #f, else #t."
 
 (define* (do-join obj chan #:optional pass)
   "Try to join channel @var{chan}."
-  (if (not (msg:is-channel? chan))
-      (error-chan "invalid channel: ~a" chan))
+  (unless (msg:is-channel? chan)
+    (error-chan "invalid channel: ~a" chan))
   (if pass
       (do-command obj #:command 'JOIN #:middle (string-join (list chan pass) ","))
       (do-command obj #:command 'JOIN #:middle chan))
