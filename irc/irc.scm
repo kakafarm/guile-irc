@@ -17,7 +17,7 @@
 (define-module (irc irc)
   #:version (0 3 0)
   #:use-module ((irc message)
-		#:renamer (symbol-prefix-proc 'msg:))
+		        #:renamer (symbol-prefix-proc 'msg:))
   #:use-module ((irc network)
                 #:renamer (symbol-prefix-proc 'nw:))
   #:use-module (irc tagged-hook)
@@ -29,44 +29,43 @@
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 popen)
   #:export (add-message-hook!
-	    add-simple-message-hook!
-	    channels->list
-	    connected?
-	    do-close
-	    do-command
-	    do-connect
-	    do-join
-	    do-listen
-	    do-nick
-	    do-part
-	    do-privmsg
-	    do-quit
-	    do-register
-	    do-runloop
-	    do-wait
-	    exists-message-hook?
-	    hostname
-	    in-channel?
-	    irc?
-	    make-irc
-	    nick
-	    password
-	    port
-	    read-message
-	    realname
-	    remove-message-hook!
-	    reset-message-hook!
-	    run-message-hook
-	    server
-	    send-message
-	    set-hostname!
-	    set-password!
-	    set-port!
-	    set-realname!
-	    set-server!
+	        add-simple-message-hook!
+	        channels->list
+	        connected?
+	        do-close
+	        do-command
+	        do-connect
+	        do-join
+	        do-listen
+	        do-nick
+	        do-part
+	        do-privmsg
+	        do-quit
+	        do-register
+	        do-runloop
+	        do-wait
+	        exists-message-hook?
+	        hostname
+	        in-channel?
+	        irc?
+	        make-irc
+	        nick
+	        password
+	        port
+	        read-message
+	        realname
+	        remove-message-hook!
+	        reset-message-hook!
+	        run-message-hook
+	        server
+	        send-message
+	        set-hostname!
+	        set-password!
+	        set-port!
+	        set-realname!
+	        set-server!
             do-wrap-port/tls
-            data-ready?         
-))
+            data-ready?))
 
 ;;;; Some globals
 (define *nick* "bot")
