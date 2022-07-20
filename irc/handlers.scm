@@ -46,8 +46,8 @@
 	     (lambda (msg)
 	       (let ([body (msg:trailing msg)]
 		         [key (string-append prefix command)])
-	         (if (and body (string=? (car (string-split body #\ )) key))
-		         (do-privmsg obj (msg:parse-target msg) reply))))])
+	         (when (and body (string=? (car (string-split body #\ )) key))
+		       (do-privmsg obj (msg:parse-target msg) reply))))])
     (add-simple-message-hook! obj handler #:command 'PRIVMSG #:tag 'hello)))
 
 (define (remove-hello-handler! obj)
