@@ -106,20 +106,20 @@
   (if (not str)
       #f
       (if (string-contains str "!")
-	  (let ([!loc (string-index str #\!)]
-		[@loc (string-index str #\@)])
-	    (_make-prefix
-	     (substring str 0 !loc)          ;; nick
-	     (substring str (+ 1 !loc) @loc) ;; user
-	     (substring str (+ 1 @loc))      ;; hostname
-             #f                              ;; server
-	     str))                           ;; raw
-	  (_make-prefix
-	   #f                                ;; nick
-           #f                                ;; user
-           #f                                ;; hostname
-           str                               ;; server
-	   str                               ;; raw
+	      (let ([!loc (string-index str #\!)]
+		        [@loc (string-index str #\@)])
+	        (_make-prefix
+	         (substring str 0 !loc)          ;nick
+	         (substring str (+ 1 !loc) @loc) ;user
+	         (substring str (+ 1 @loc))      ;hostname
+             #f                              ;server
+	         str))                           ;raw
+	      (_make-prefix
+	       #f                           ;nick
+           #f                           ;user
+           #f                           ;hostname
+           str                          ;server
+	       str                          ;raw
            ))))
 
 (define (symbolize cmd)
