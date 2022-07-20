@@ -295,11 +295,11 @@ returns #f, else #t."
 		#:middle (format #f "~a ~a *" (nick obj) (hostname obj))
 		#:trailing (realname obj)))
 
-  (when (not (connected? obj))
-      (do-connect obj))
+  (unless (connected? obj)
+    (do-connect obj))
   (set-nick! obj (try-nick (nick obj)))
   (try-user)
-  (when (not (registered? obj))
+  (unless (registered? obj)
     (set-registered?! obj #t)))
 
 (define* (do-close obj)
