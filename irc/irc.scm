@@ -119,7 +119,7 @@
 
 ;; Test
 (define (symbolize c)
-"Symbolize returns a symbol if @var{c} is a symbol or string, #f otherwise."
+  "Symbolize returns a symbol if @var{c} is a symbol or string, #f otherwise."
   (cond
    ((symbol? c) c)
    ((string? c) (string->symbol c))
@@ -138,27 +138,27 @@
     (let ([newpos (+ pos size)])
       (cond 
        ([>= newpos (string-length str)]
-	(append total (list (substring str pos))))
+	    (append total (list (substring str pos))))
        (else
-	(_split newpos (append total (list (substring str pos newpos))))))))
+	    (_split newpos (append total (list (substring str pos newpos))))))))
   (_split 0 '()))
 
 (define (split-long-message msg)
   (let ([cmd (msg:command msg)]
-	[mid (msg:middle msg)]
-	[trail (msg:trailing msg)])
+	    [mid (msg:middle msg)]
+	    [trail (msg:trailing msg)])
     (if trail
-	(let* ([prelength (- (string-length (msg:message->string msg)) (string-length trail))]
-	       [splitmsg (string-split-size trail (- *max-msgl* prelength))])
-	  (map (lambda (str)
-		 (msg:make-message #:command cmd #:middle mid #:trailing str))
-	       splitmsg))
-	(list msg))))
+	    (let* ([prelength (- (string-length (msg:message->string msg)) (string-length trail))]
+	           [splitmsg (string-split-size trail (- *max-msgl* prelength))])
+	      (map (lambda (str)
+		         (msg:make-message #:command cmd #:middle mid #:trailing str))
+	           splitmsg))
+	    (list msg))))
 
 (define (send-message obj msg)
   "Send irc-message @var{msg} to the server."
   (for-each (lambda (m) (send-raw obj (msg:message->string m)))
-	    (split-long-message msg)))
+	        (split-long-message msg)))
 
 (define (send-raw obj str)
   "Send string @var{str} to the server"
