@@ -408,4 +408,3 @@ Procedures will be added to the front of the hook unless append is not #f."
   (reset-tagged-hook! (hooks obj)))
 
 (define handle-message run-message-hook)
-
