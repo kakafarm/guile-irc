@@ -351,9 +351,8 @@ returns #f, else #t."
 
 (define (do-part obj chan)
   "Part channel @var{chan}."
-  (if (in-channel? obj chan)
-      (do-command obj #:command 'PART #:middle chan)
-      #f))
+  (when (in-channel? obj chan)
+    (do-command obj #:command 'PART #:middle chan)))
 
 (define* (add-message-hook!
 	  obj proc #:key tag append)
