@@ -1,4 +1,5 @@
 ;;; Copyright © 2012 bas smit (fbs)
+;;; Copyright © 2022 Ricardo Wurmus
 ;;;
 ;;; This program is free software; you can redistribute it and/or
 ;;; modify it under the terms of the GNU Lesser General Public License
@@ -44,10 +45,11 @@
 				                 (reply "hello master!"))
   (let ([handler
 	     (lambda (msg)
-	       (let ([body (msg:trailing msg)]
-		         [key (string-append prefix command)])
-	         (when (and body (string=? (car (string-split body #\ )) key))
-		       (do-privmsg obj (msg:parse-target msg) reply))))])
+	       (when (and=> (msg:trailing msg)
+                        (lambda (body)
+                          (string-prefix? (string-append prefix command " ")
+                                          body)))
+		     (do-privmsg obj (msg:parse-target msg) reply)))])
     (add-simple-message-hook! obj handler #:command 'PRIVMSG #:tag 'hello)))
 
 (define (remove-hello-handler! obj)
