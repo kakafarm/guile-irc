@@ -17,11 +17,11 @@
 (define-module (irc channel)
   #:version (0 3 0)
   #:export (make-channel-table
-	    channel-add!
-	    channel-remove!
-	    channel-clear!
-	    channel-table->list
-	    channel-ref))
+	        channel-add!
+	        channel-remove!
+	        channel-clear!
+	        channel-table->list
+	        channel-ref))
 
 (define (make-channel-table)
   (make-hash-table 31))
