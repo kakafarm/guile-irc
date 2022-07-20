@@ -344,7 +344,7 @@ returns #f, else #t."
 
 (define (do-runloop obj)
   (while #t
-      (handle-message obj (do-wait obj))))
+    (handle-message obj (do-wait obj))))
 
 (define (do-part obj chan)
   "Part channel @var{chan}."
