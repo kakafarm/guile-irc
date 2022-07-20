@@ -280,9 +280,9 @@ returns #f, else #t."
   (define (check-nick-valid obj)
     (let ([msg (do-listen obj)])
       (cond [(eq? msg #f) #t]
-	    [(and (msg:message? msg)
-		  (eq? (msg:command msg) 433)) #f]
-	    [else (check-nick-valid obj)])))
+	        [(and (msg:message? msg)
+		          (eq? (msg:command msg) 433)) #f]
+	        [else (check-nick-valid obj)])))
   (define (try-nick nick)
     (do-command obj #:command 'NICK #:middle nick)
     (sleep 2)
@@ -291,9 +291,9 @@ returns #f, else #t."
 	    (try-nick (string-append nick "_"))))
   (define (try-user)
     (do-command obj 
-		#:command 'USER 
-		#:middle (format #f "~a ~a *" (nick obj) (hostname obj))
-		#:trailing (realname obj)))
+		        #:command 'USER
+		        #:middle (format #f "~a ~a *" (nick obj) (hostname obj))
+		        #:trailing (realname obj)))
 
   (unless (connected? obj)
     (do-connect obj))
