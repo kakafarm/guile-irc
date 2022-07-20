@@ -173,8 +173,6 @@
 Command: string or number.
 middle: string or list of strings.
 trailing: string."
-  (define (typecheck-list pred lst)
-    (every pred list))
   (define (check-command cmd)
     (cond
      ((string? cmd) (string->symbol (string-upcase cmd)))
@@ -185,7 +183,7 @@ trailing: string."
   (define (check-middle middle)
     (cond
      ((not middle) #f)
-     ((and (list? middle) (typecheck-list string? middle))
+     ((and (list? middle) (every string? middle))
       (error-type "Expected middle to be of type string or '(string)."))
      ((string? middle) middle)
      (else 
