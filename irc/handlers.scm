@@ -18,37 +18,36 @@
   #:version (0 3 0)
   #:use-module (irc irc)
   #:use-module ((irc message)
-		 #:renamer (symbol-prefix-proc 'msg:))
+		        #:renamer (symbol-prefix-proc 'msg:))
   #:export (install-ping-handler!
-	    install-printer!
-	    install-hello-handler!
-	    install-eof-handler!
-	    remove-eof-handler!
-	    remove-printer!
-	    remove-ping-handler!
-	    remove-hello-handler!))
+	        install-printer!
+	        install-hello-handler!
+	        install-eof-handler!
+	        remove-eof-handler!
+	        remove-printer!
+	        remove-ping-handler!
+	        remove-hello-handler!))
 
 (define (install-ping-handler! obj)
   (let ([ping-handler
-	 (lambda (msg) (do-command obj #:command 'PONG #:trailing (msg:parse-target msg)))])
+	     (lambda (msg) (do-command obj #:command 'PONG #:trailing (msg:parse-target msg)))])
     (add-simple-message-hook! obj ping-handler #:tag 'ping #:command 'PING)))
-
 
 (define* (install-printer! obj  #:key (port (current-output-port)))
   (let ([printer
-	 (lambda (msg)
-	   (format port "~a\n" (msg:message->string msg))
-	   msg)])
+	     (lambda (msg)
+	       (format port "~a\n" (msg:message->string msg))
+	       msg)])
     (add-message-hook! obj printer #:tag 'printer)))
 
 (define* (install-hello-handler! obj #:key (prefix ",") (command "hello") 
-				 (reply "hello master!"))
+				                 (reply "hello master!"))
   (let ([handler
-	 (lambda (msg)
-	   (let ([body (msg:trailing msg)]
-		 [key (string-append prefix command)])
-	     (if (and body (string=? (car (string-split body #\ )) key))
-		 (do-privmsg obj (msg:parse-target msg) reply))))])
+	     (lambda (msg)
+	       (let ([body (msg:trailing msg)]
+		         [key (string-append prefix command)])
+	         (if (and body (string=? (car (string-split body #\ )) key))
+		         (do-privmsg obj (msg:parse-target msg) reply))))])
     (add-simple-message-hook! obj handler #:command 'PRIVMSG #:tag 'hello)))
 
 (define (remove-hello-handler! obj)
