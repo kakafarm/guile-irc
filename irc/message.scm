@@ -24,25 +24,25 @@
   #:use-module (ice-9 format)
   #:use-module (ice-9 rdelim)
   #:use-module ((srfi srfi-1)
-		#:select (every any))
+		        #:select (every any))
   #:use-module ((srfi srfi-11)
-		 #:select (let-values))
+		        #:select (let-values))
   #:use-module (srfi srfi-9)
   #:use-module (srfi srfi-9 gnu)
   #:use-module (irc error)
   #:export (command
-	    middle
-	    trailing
-	    time
-	    prefix
-	    prefix-type
-	    message?
-	    is-channel?
-	    parse-target
-	    parse-source
-	    make-message
-	    parse-message-string
-	    message->string))
+	        middle
+	        trailing
+	        time
+	        prefix
+	        prefix-type
+	        message?
+	        is-channel?
+	        parse-target
+	        parse-source
+	        make-message
+	        parse-message-string
+	        message->string))
 
 (define *channel-prefixes* '(#\# #\& #\! #\+))
 
