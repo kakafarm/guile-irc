@@ -364,31 +364,31 @@ Procedures will be added to the front of the hook unless append is not #f."
     (add-tagged-hook! (hooks obj) proc tag append))
 
 (define* (add-simple-message-hook!
-	 obj proc #:key sender receiver command middle trailing tag append)
+	      obj proc #:key sender receiver command middle trailing tag append)
   (let ([handler
-	(lambda (msg)
-	  (let ([cmd (msg:command msg)]
-		[send (msg:parse-source msg)]
-		[rec (msg:middle msg)]
-		[trail (msg:trailing msg)])
-	    (and
-	     (or (not command)
-		 (if (procedure? command)
-		     (command cmd)
-		     (eq? command cmd)))
-	     (or (not sender)
-		 (if (procedure? sender)
-		     (sender send)
-		     (string=? send sender)))
-	     (or (not receiver)
-		 (if (procedure? receiver)
-		     (receiver rec)
-		     (string=? rec receiver)))
-	     (or (not trailing)
-		 (if (procedure? trailing)
-		     (trailing trail)
-		     (string-contains trail trailing)))
-	     (proc msg))))])
+	     (lambda (msg)
+	       (let ([cmd (msg:command msg)]
+		         [send (msg:parse-source msg)]
+		         [rec (msg:middle msg)]
+		         [trail (msg:trailing msg)])
+	         (and
+	          (or (not command)
+		          (if (procedure? command)
+		              (command cmd)
+		              (eq? command cmd)))
+	          (or (not sender)
+		          (if (procedure? sender)
+		              (sender send)
+		              (string=? send sender)))
+	          (or (not receiver)
+		          (if (procedure? receiver)
+		              (receiver rec)
+		              (string=? rec receiver)))
+	          (or (not trailing)
+		          (if (procedure? trailing)
+		              (trailing trail)
+		              (string-contains trail trailing)))
+	          (proc msg))))])
     (add-tagged-hook! (hooks obj) handler tag append)))
 
 (define (exists-message-hook? obj tag)
