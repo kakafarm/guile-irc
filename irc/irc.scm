@@ -173,9 +173,8 @@
   (define (delete-return s)
     (string-delete (string->char-set "\r") s))
   (let ([message (nw:receive (network obj))])
-    (if (not (eof-object? message))
-        (msg:parse-message-string (delete-return message))
-        #f)))
+    (and (not (eof-object? message))
+         (msg:parse-message-string (delete-return message)))))
 
 (define* (cleanup-irc-object obj)
   "Reset @var{channels}, @var{connected} and socket to their initial value.
