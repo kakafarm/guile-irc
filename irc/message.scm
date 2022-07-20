@@ -177,7 +177,7 @@ trailing: string."
     (cond
      ((string? cmd) (string->symbol (string-upcase cmd)))
      ((or (number? cmd)
-	  (symbol? cmd)) cmd)
+	      (symbol? cmd)) cmd)
      (else 
       (error-type "Expected command to be of type symbol or string or number."))))
   (define (middle-valid? middle)
@@ -192,7 +192,7 @@ trailing: string."
   (define (check-trailing trail)
     (if (and trail (not (string? trail)))
         (error-type "Expected trailing to be of string.")
-	trail))
+	    trail))
   (let ([cmd (check-command command)]
 	    [middle (and (middle-valid? middle) middle)]
 	    [trailing (check-trailing trailing)])
