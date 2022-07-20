@@ -226,8 +226,8 @@ string; port: integer; hostname: string."
   (if (registered? obj)
       (error-set "set-port!: impossible to change port when registered.")
       (if (< 0 var 65536)
-	  (_set-port! obj var)
-	  (error-port "set-port!: invalid port number."))))
+	      (_set-port! obj var)
+	      (error-port "set-port!: invalid port number."))))
 
 (define (set-server! obj var)
   "If not yet registered change server to @var{var}."
@@ -268,7 +268,7 @@ returns #f, else #t."
       (error-type "do-nick?: Expected string got: ~a." nick)
       (if (not (registered? obj))
           (_set-nick! obj nick)
-	  (do-command obj #:command 'NICK #:middle nick))))
+	      (do-command obj #:command 'NICK #:middle nick))))
 
 (define (do-connect obj)
   "Try to connect object to the specified server."
@@ -287,8 +287,8 @@ returns #f, else #t."
     (do-command obj #:command 'NICK #:middle nick)
     (sleep 2)
     (if (check-nick-valid obj)
-	nick
-	(try-nick (string-append nick "_"))))
+	    nick
+	    (try-nick (string-append nick "_"))))
   (define (try-user)
     (do-command obj 
 		#:command 'USER 
