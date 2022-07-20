@@ -1,4 +1,5 @@
 ;; Copyright (C) 2012 bas smit (fbs)
+;; Copyright (C) 2022 Ricardo Wurmus
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU Lesser General Public License
@@ -17,6 +18,7 @@
 (define-module (irc error-code)
   #:version (0 3 0)
   #:use-module (irc error)
+  #:use-module (ice-9 match)
   #:export (lookup-error-code
 	    error-name
 	    error-description))
@@ -82,16 +84,15 @@
 (define (lookup-error-code code)
   (cond
    ((not (number? code)) #f)
-   ((< 400 code 503) (cdr (assoc code error-table)))
+   ((< 400 code 503) (assoc-ref error-table code))
    (else (error-invalid "Invalid error code: ~a." code))))
 
 (define (error-name dp)
-  (if (pair? dp)
-      (car dp)
-      #f))
+  (match dp
+    ((name . description) name)
+    (_ #false)))
 
 (define (error-description dp)
-  (if (pair? dp)
-      (cdr dp)
-      #f))
-
+  (match dp
+    ((name . description) description)
+    (_ #false)))
