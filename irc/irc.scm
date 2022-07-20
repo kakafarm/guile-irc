@@ -185,29 +185,29 @@ to #f to disable."
   (set-registered?! obj #f)
   (nw:close (network obj)))
 
-(define* (make-irc #:key (nick *nick*) (realname *nick*) (server *server*)
-		   (port *port*) (hostname *hostname*) (ssl #f))
-  "Create a new irc object.
-nick: string
-realname: string
-server: string
-port: integer
-hostname: string."
+(define* (make-irc #:key
+                   (nick *nick*)
+                   (realname *nick*)
+                   (server *server*)
+		           (port *port*)
+                   (hostname *hostname*)
+                   (ssl #f))
+  "Create a new irc object.  nick: string; realname: string; server:
+string; port: integer; hostname: string."
   (_make-irc
-   (make-channel-table)	;; channels
-   #f			;; connected
-   (make-tagged-hook)	;; hooks
-   hostname		;; hostname
-   nick			;; nick
-   port			;; port
-   realname		;; realname
-   server		;; server
-   #f                   ;; registered
-   (nw:create           ;; network
-    #:address server   
+   (make-channel-table)                 ;channels
+   #f                                   ;connected
+   (make-tagged-hook)                   ;hooks
+   hostname                             ;hostname
+   nick                                 ;nick
+   port                                 ;port
+   realname                             ;realname
+   server                               ;server
+   #f                                   ;registered
+   (nw:create                           ;network
+    #:address server
     #:port port
-    #:ssl ssl)                   
-   ))                 
+    #:ssl ssl)))
 
 (define (channels->list obj)
   "Return the channels joined by irc-object @var{obj} as list."
