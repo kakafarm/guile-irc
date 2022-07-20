@@ -1,4 +1,5 @@
 ;;; Copyright © 2012, 2013 bas smit (fbs)
+;;; Copyright © 2022 Ricardo Wurmus
 ;;;
 ;;; This program is free software; you can redistribute it and/or
 ;;; modify it under the terms of the GNU Lesser General Public License
@@ -18,6 +19,7 @@
 
 (define-module (irc message)
   #:version (0 3 0)
+  #:use-module (ice-9 match)
   #:use-module (ice-9 regex)
   #:use-module (ice-9 format)
   #:use-module (ice-9 rdelim)
@@ -149,11 +151,11 @@
 
 (define (parse-message-string msg)
   "Parse irc message string @var{msg} and return an irc-message."
-  (define (flatten list)
-    (case (length list)
-      ((0) #f)
-      ((1) (car list))
-      (else list)))
+  (define (flatten lst)
+    (match lst
+      (() #false)
+      ((one) one)
+      (_ lst)))
   (catch #t
     (lambda ()
       (let-values ([(m1 m2) (run-parser-regex msg)])
