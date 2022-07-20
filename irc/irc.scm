@@ -308,10 +308,9 @@ returns #f, else #t."
 
 (define* (do-quit obj #:key (quit-msg *quitmsg*))
   "Send QUIT to the server and clean up."
-  (if (registered? obj)
-      (begin (do-command obj #:command 'QUIT #:trailing quit-msg)
-	     (do-close obj))
-      (do-close obj)))
+  (when (registered? obj)
+    (do-command obj #:command 'QUIT #:trailing quit-msg))
+  (do-close obj))
 
 (define (do-privmsg obj receiver msg)
   "Send message @var{msg} to @var{reciever} (channel or user)."
