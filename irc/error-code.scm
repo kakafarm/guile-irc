@@ -20,27 +20,26 @@
   #:use-module (irc error)
   #:use-module (ice-9 match)
   #:export (lookup-error-code
-	    error-name
-	    error-description))
+	        error-name
+	        error-description))
 
 (define-error error-invalid 'irc:error-code:invalid)
 
 (define error-table 
-  '(
-    (401 . (ERR_NOSUCHNICK . "<nickname> :No such nick/channel" ))
+  '((401 . (ERR_NOSUCHNICK . "<nickname> :No such nick/channel"))
     (402 . (ERR_NOSUCHSERVER . "<server name> :No such server"))
     (403 . (ERR_NOSUCHCHANNEL . "<channel name> :No such channel"))
-    (404 . (ERR_CANNOTSENDTOCHAN . "<channel name> :Cannot send to channel" ))
-    (405 . (ERR_TOOMANYCHANNELS . "<channel name> :You have joined too many channels" ))
-    (406 . (ERR_WASNOSUCHNICK . "<nickname> :There was no such nickname" ))
-    (407 . (ERR_TOOMANYTARGETS . "<target> :<error code> recipients. <abort message>" ))
-    (408 . (ERR_NOSUCHSERVICE . "<service name> :No such service" ))
-    (409 . (ERR_NOORIGIN . ":No origin specified" ))
-    (411 . (ERR_NORECIPIENT . ":No recipient given (<command>)" ))
+    (404 . (ERR_CANNOTSENDTOCHAN . "<channel name> :Cannot send to channel"))
+    (405 . (ERR_TOOMANYCHANNELS . "<channel name> :You have joined too many channels"))
+    (406 . (ERR_WASNOSUCHNICK . "<nickname> :There was no such nickname"))
+    (407 . (ERR_TOOMANYTARGETS . "<target> :<error code> recipients. <abort message>"))
+    (408 . (ERR_NOSUCHSERVICE . "<service name> :No such service"))
+    (409 . (ERR_NOORIGIN . ":No origin specified"))
+    (411 . (ERR_NORECIPIENT . ":No recipient given (<command>)"))
     (412 . (ERR_NOTEXTTOSEND . ":No text to send"))
     (413 . (ERR_NOTOPLEVEL . "<mask> :No toplevel domain specified"))
-    (414 . (ERR_WILDTOPLEVEL . "<mask> :Wildcard in toplevel domain" ))
-    (415 . (ERR_BADMASK . "<mask> :Bad Server/host mask" ))
+    (414 . (ERR_WILDTOPLEVEL . "<mask> :Wildcard in toplevel domain"))
+    (415 . (ERR_BADMASK . "<mask> :Bad Server/host mask"))
     (421 . (ERR_UNKNOWNCOMMAND . "<command> :Unknown command"))
     (422 . (ERR_NOMOTD . ":MOTD File is missing"))
     (423 . (ERR_NOADMININFO . "<server> :No administrative info available"))
@@ -62,7 +61,7 @@
     (463 . (ERR_NOPERMFORHOST . ":Your host isnt among the privileged"))
     (464 . (ERR_PASSWDMISMATCH . ":Password incorrect"))
     (465 . (ERR_YOUREBANNEDCREEP . ":You are banned from this server"))
-    (466 . (ERR_YOUWILLBEBANNED  . "" ))
+    (466 . (ERR_YOUWILLBEBANNED  . ""))
     (467 . (ERR_KEYSET . "<channel> :Channel key already set"))
     (471 . (ERR_CHANNELISFULL . "<channel> :Cannot join channel (+l)"))
     (472 . (ERR_UNKNOWNMODE . "<char> :is unknown mode char to me for <channel>"))
