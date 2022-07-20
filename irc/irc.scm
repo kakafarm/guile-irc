@@ -233,23 +233,23 @@ string; port: integer; hostname: string."
   "If not yet registered change server to @var{var}."
   (if (registered? obj)
       (error-set "set-server!: impossible to change server when registered.")
-      (if (= 0 (string-length var))
-	  (_set-server! obj *server*)
-	  (_set-server! obj var))))
+      (if (string-null? var)
+	      (_set-server! obj *server*)
+	      (_set-server! obj var))))
 
 (define (set-realname! obj var)
   "If not yet registered change realname to @var{var}."
   (if (registered? obj)
       (error-set "set-realname!: impossible to change realname when registered.")
-      (if (= 0 (string-length var))
-	  (_set-realname! obj *realname*)
-	  (_set-realname! obj var))))
+      (if (string-null? var)
+	      (_set-realname! obj *realname*)
+	      (_set-realname! obj var))))
 
 (define (set-hostname! obj var)
   "If not yet registered change hostname to @var{var}."
   (if (registered? obj)
       (error-set "set-hostname!: impossible to change hostname when registered.")
-      (if (= 0 (string-length var))
+      (if (string-null? var)
           (_set-hostname! obj *hostname*)
           (_set-hostname! obj var))))
 
@@ -257,7 +257,7 @@ string; port: integer; hostname: string."
   "If not yet registered change nick to @var{var}."
   (if (registered? obj)
       (error-set "set-nick!: impossible to change nick when registered.")
-      (if (= 0 (string-length var))
+      (if (string-null? var)
           (_set-nick! obj *nick*)
           (_set-nick! obj var))))
 
