@@ -325,9 +325,8 @@ returns #f, else #t."
 (define (do-listen obj)
   "Return a parsed message (see the message module) if there is data available,
 #f otherwise."
-  (if (data-ready? obj)
-      (read-message obj)
-      #f))
+  (and (data-ready? obj)
+       (read-message obj)))
 
 (define (data-ready? obj)
   (nw:data-ready? (network obj)))
