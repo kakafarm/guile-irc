@@ -43,5 +43,5 @@ An irc library for [GNU guile](http://www.gnu.org/software/guile/).
 
 ## API
 
-[API reference page](http://fbs.github.com/guile-irc/)
+The API is documented in the Info manual.
 
