@@ -1,6 +1,6 @@
 # GUILE-IRC
 
-An irc library for [GNU guile](http://www.gnu.org/software/guile/).
+An IRC library for [GNU Guile](https://www.gnu.org/software/guile/).
 
 ## Usage
 
@@ -13,7 +13,7 @@ An irc library for [GNU guile](http://www.gnu.org/software/guile/).
               #:renamer (symbol-prefix-proc 'msg:)))
 ```
 
-2. Create an irc object.
+2. Create an IRC object.
 ```scheme
 (define irc (make-irc #:nick "bot" #:server "localhost" #:port 6697 #:ssl #t))
 ```
